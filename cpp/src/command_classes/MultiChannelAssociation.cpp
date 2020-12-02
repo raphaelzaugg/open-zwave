@@ -356,6 +356,9 @@ namespace OpenZWave
 //-----------------------------------------------------------------------------
 			void MultiChannelAssociation::Set(uint8 _groupIdx, uint8 _targetNodeId, uint8 _endPoint)
 			{
+				int forceinsances_flag = m_com.GetFlagBool(COMPAT_FLAG_MCA_FORCEINSTANCES);
+				Log::Write(LogLevel_Info, GetNodeId(), "The forceinsances_flag is  %d, _endPoint is %d", forceinsances_flag, _endPoint);
+
 
 				/* for Qubino devices, we should always set a End Point if its the ControllerNode, so MultChannelEncap works.  - See Bug #857 */
 				if ((m_com.GetFlagBool(COMPAT_FLAG_MCA_FORCEINSTANCES) == true) && (_endPoint == 0) && (GetDriver()->GetControllerNodeId() == _targetNodeId))
